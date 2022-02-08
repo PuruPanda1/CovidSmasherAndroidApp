@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "763423662321",
+    "project_id": "login-9e520",
+    "storage_bucket": "login-9e520.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763423662321:android:4be33845dffd0d32d58950",
+        "android_client_info": {
+          "package_name": "com.purupanda.login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763423662321-ck4c8b17777ua3n4ep6finhncn1gb9t4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFzmlPILQ-ZYY_TPFjsp2ST_EkXYTZWcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763423662321-ck4c8b17777ua3n4ep6finhncn1gb9t4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
