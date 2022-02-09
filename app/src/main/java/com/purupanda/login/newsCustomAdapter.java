@@ -1,11 +1,14 @@
 package com.purupanda.login;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,12 +41,19 @@ public class newsCustomAdapter extends RecyclerView.Adapter<newsCustomAdapter.Vi
         holder.newsTitle.setText(articles.getNewsTitle());
         holder.newsSource.setText(articles.getNewsSource());
         Picasso.get().load(articles.getNewsImage()).into(holder.newsImage);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("working", "onClick: "+articles.getNewsTitle());
+                Intent in = new Intent(context.getActivity(),detailedNewsPage.class);
+                in.putExtra("newsTitle",articles.getNewsTitle());
+                in.putExtra("description",articles.getDesctiption());
+                in.putExtra("source",articles.getNewsSource());
+                in.putExtra("newsImage",articles.getNewsImage());
+                in.putExtra("newsUrl",articles.getNewsUrl());
+                context.startActivity(in);
+            }
+        });
     }
 
     @Override

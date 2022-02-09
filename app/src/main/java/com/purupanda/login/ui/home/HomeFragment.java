@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
 
     private void getNews(){
         articlesArrayList.clear();
-        String url = "https://gnews.io/api/v4/search?q=covid&token=91b145c4cfebf58974bd497a23bdabd1&lang=en&country=in";
+        String url = "https://gnews.io/api/v4/search?q=medical&token=91b145c4cfebf58974bd497a23bdabd1&lang=en&country=in";
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url,null, new com.android.volley.Response.Listener<JSONObject>(){
@@ -74,8 +74,9 @@ public class HomeFragment extends Fragment {
                                 JSONObject source = obj.getJSONObject("source");
                                 articlesArrayList.add(new newsModel
                                         (obj.getString("title"),source.getString("name"),
-                                                obj.getString("image"),obj.getString("url"))
+                                                obj.getString("image"),obj.getString("url"),obj.getString("description"))
                                 );
+//                                Log.d("description", "onResponse: "+articlesArrayList.get(0).getDesctiption());
                             }
                             newsRVAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
