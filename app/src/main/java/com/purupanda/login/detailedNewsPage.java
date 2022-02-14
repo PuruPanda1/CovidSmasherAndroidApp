@@ -33,9 +33,12 @@ public class detailedNewsPage extends AppCompatActivity {
         binding.readMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(Intent.ACTION_VIEW);
-                in.setData(Uri.parse(newsUrl));
+                Uri webpage = Uri.parse(newsUrl);
+                Intent in = new Intent(Intent.ACTION_VIEW,webpage);
+//                in.setData(Uri.parse(newsUrl));
                 startActivity(in);
+//                Intent chooser = Intent.createChooser(in,null);
+//                startActivity(chooser);
             }
         });
     }

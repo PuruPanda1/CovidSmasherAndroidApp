@@ -83,7 +83,6 @@ public class DashboardFragment extends Fragment {
                             {
                                 int val = Integer.parseInt(newCases);
                                 totalRecovered = String.valueOf(round(val*0.7));
-                                Toast.makeText(getContext(), totalRecovered, Toast.LENGTH_SHORT).show();
                             }
                             binding.totalConfirmed.setText(totalConfirmed);
                             binding.totalDeath.setText(totalDeath);
