@@ -6,14 +6,37 @@ public class users {
     String password;
     String profilePicture;
     String userId;
+    String number;
 
-    public users(String name, String email, String password, String profilePicture, String userId) {
+    public users(String name, String email, String password, String profilePicture, String userId, String number, String address) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.profilePicture = profilePicture;
         this.userId = userId;
+        this.number = number;
+        this.address = address;
     }
+
+    String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+
 
     public users(){}
 

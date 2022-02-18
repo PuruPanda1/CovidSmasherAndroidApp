@@ -89,21 +89,9 @@ public class signInPage extends AppCompatActivity {
         progressdialog.setTitle("Logging In");
         progressdialog.setMessage("Logging in into your account");
 
-//        show password option
 
-        binding.showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
-                {
-                    binding.password.setTransformationMethod(null);
-                }
-                else
-                {
-                    binding.password.setTransformationMethod(new PasswordTransformationMethod());
-                }
-            }
-        });
+
+
 
 //        creating instance for the firebase authentication system and database
         auth = FirebaseAuth.getInstance();

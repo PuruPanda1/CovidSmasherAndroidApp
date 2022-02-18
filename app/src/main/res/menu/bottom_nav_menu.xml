@@ -5,12 +5,12 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/home"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/graph_dasboard"
         android:title="@string/title_dashboard" />
 
     <item
@@ -20,12 +20,12 @@
 
     <item
         android:id="@+id/vaccination"
-        android:icon="@drawable/vaccine_alternative"
+        android:icon="@drawable/vaccination"
         android:title="@string/vaccination" />
 
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/profile_alternative"
+        android:icon="@drawable/profile"
         android:title="@string/profile" />
 
 

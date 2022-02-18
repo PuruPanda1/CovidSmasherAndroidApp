@@ -5,110 +5,254 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="5dp"
+    android:weightSum="3"
     tools:context=".ui.profile.profileFragment">
 
-    <ImageView
-        android:id="@+id/profilePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:padding="3dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/image_not_available" />
 
-    <TextView
-        android:id="@+id/profileName"
+    <LinearLayout
+        android:id="@+id/topPart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center_horizontal"
-        android:text="UserName"
-        android:textSize="25sp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/mainScreenBlue"
+        android:backgroundTint="@color/mainScreenBlue"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="mail:"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/profileMail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center_horizontal"
-        android:text="Mail Id"
-        android:textSize="25sp" />
-
-    <RadioGroup
-        android:id="@+id/profileGenderGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userProfilePhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image_not_available" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:padding="2dp"
-            android:text="Gender"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat_alternates"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="5dp"
+            android:text="Username" />
 
-        <RadioButton
-            android:id="@+id/profileMaleRadioBtn"
+        <TextView
+            android:id="@+id/userEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="2dp"
+            android:gravity="center"
+            android:layout_marginTop="-13dp"
+            android:layout_marginBottom="2dp"
+            android:textSize="15sp"
             android:fontFamily="@font/poppins"
-            android:text="Male"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/prfoileFemaleRadioBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:layout_weight="1"
-            android:padding="2dp"
-            android:text="Female"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/profileNotToSayBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:layout_weight="1"
-            android:padding="2dp"
-            android:text="None"
-            android:textSize="18sp" />
-    </RadioGroup>
+            android:textColor="@color/white"
+            android:text="username@email.com" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/profileResetPasswordBtn"
-        android:layout_width="match_parent"
+        android:id="@+id/profileBackHomeButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-25dp"
         android:backgroundTint="@color/mainScreenGreen"
-        android:text="Reset Password"
-        app:cornerRadius="8dp" />
+        android:drawableLeft="@drawable/back_small"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:text="Back to Home"
+        android:drawableTint="@color/white"
+        app:cornerRadius="20dp" />
 
-    <Button
-        android:id="@+id/profileLogOutBtn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:backgroundTint="@color/mainScreenGreen"
-        android:text="Log Out"
-        app:cornerRadius="8dp" />
+        android:layout_height="0dp"
+        android:layout_weight="2.4"
+        android:background="@color/white"
+        android:orientation="vertical">
 
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:weightSum="3">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/profile"></ImageView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_margin="8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Name"
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
+                    <TextView
+                        android:id="@+id/profileUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:maxLines="1"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+
+                        ></TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:weightSum="3">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/mobile"></ImageView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_margin="8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Mobile Number"
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
+                    <TextView
+                        android:id="@+id/profileMobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:maxLines="1"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        ></TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:weightSum="3">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/mail"></ImageView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_margin="8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Email Id"
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
+                    <TextView
+                        android:id="@+id/profileEmailId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:maxLines="1"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+
+                        ></TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:weightSum="3">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/address"></ImageView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_margin="8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Address"
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
+                    <TextView
+                        android:id="@+id/profileUserAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_alternates"
+                        android:maxLines="3"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+
+                        ></TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:drawableRight="@drawable/edit_button"
+            android:drawableTint="@color/white"
+            android:padding="5dp"
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/profilelogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="-5dp"
+            android:padding="8dp"
+            android:drawableRight="@drawable/logout_button"
+            android:drawableTint="@color/white"
+            android:text="Log out" />
+
+    </LinearLayout>
 </LinearLayout>

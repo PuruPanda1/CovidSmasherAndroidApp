@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestIdToken("763423662321")
+                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestIdToken("763423662321")
                 .requestEmail()
                 .build();
 
@@ -88,10 +88,13 @@ public class MainActivity extends AppCompatActivity {
                     GoogleSignInAccount account = googleSignInAccountTask.getResult(ApiException.class);
                     createFirebaseUserFromGoogle(account.getIdToken());
                 } catch (ApiException e) {
-                    Toast.makeText(MainActivity.this, "erro: "+e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "error: "+e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+
+
 
 //        firebase authentication and database
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="purple_200">#0D8E53</color>
     <color name="purple_500">#0D8E53</color>
     <color name="purple_700">#0D8E53</color>
@@ -10,7 +10,7 @@
     <color name="mainScreenBlue">#4479E3</color>
     <color name="mainScreenGreen">#7FDB97</color>
     <color name="fbButtonColor">#60A7FF</color>
-
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>
 
 
 </resources>
