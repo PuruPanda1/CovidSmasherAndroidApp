@@ -44,7 +44,7 @@ public class newsCustomAdapter extends RecyclerView.Adapter<newsCustomAdapter.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("working", "onClick: "+articles.getNewsTitle());
+//                Log.d("working", "onClick: "+articles.getNewsTitle());
                 Intent in = new Intent(context.getActivity(),detailedNewsPage.class);
                 in.putExtra("newsTitle",articles.getNewsTitle());
                 in.putExtra("description",articles.getDesctiption());

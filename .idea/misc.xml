@@ -25,12 +25,14 @@
         <entry key="app/src/main/res/layout/activity_main_page.xml" value="0.261965811965812" />
         <entry key="app/src/main/res/layout/activity_news.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_in_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_state_selection.xml" value="0.2744762719110731" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.261965811965812" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.261965811965812" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_vaccination.xml" value="0.2740487387772552" />
         <entry key="app/src/main/res/layout/recycle_view_resource_file.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/state_city_recyclerview.xml" value="0.2744762719110731" />
         <entry key="app/src/main/res/layout/vaccine_recyclerview.xml" value="0.2740487387772552" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
       </map>

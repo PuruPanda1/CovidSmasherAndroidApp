@@ -2,6 +2,7 @@ package com.purupanda.login.ui.vaccination;
 
 import static java.lang.Math.round;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,16 +13,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.purupanda.login.R;
-import com.purupanda.login.databinding.FragmentDashboardBinding;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.purupanda.login.databinding.FragmentVaccinationBinding;
-import com.purupanda.login.models.newsModel;
+import com.purupanda.login.models.cityStateModel;
 import com.purupanda.login.models.vaccinationCenters;
 import com.purupanda.login.vaccinationCustomAdapter;
 
@@ -30,6 +37,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +51,17 @@ public class vaccinationFragment extends Fragment {
     private RecyclerView vaccineRV;
     private ArrayList<vaccinationCenters> centersArrayList;
     private vaccinationCustomAdapter mAdapter;
+
+    private final Calendar c = Calendar.getInstance();
+    private String date=null;
+
+    private String apiDistrictId="0";
+
+//    variables needed for state spinner
+
+        private ArrayList<cityStateModel> stateList;
+        private ArrayList<String> getStateName;
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -91,40 +111,81 @@ public class vaccinationFragment extends Fragment {
 //        return inflater.inflate(R.layout.fragment_vaccination, container, false);
 
 
+
         binding = FragmentVaccinationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+//        variables for vaccination recycler view
         vaccineRV = binding.vaccinationCenterRecyclerView;
         centersArrayList = new ArrayList<>();
         mAdapter = new vaccinationCustomAdapter(centersArrayList,this);
         vaccineRV.setLayoutManager(new LinearLayoutManager(getContext()));
         vaccineRV.setAdapter(mAdapter);
-//        getStatus("390019","31-03-2021");
-//        mAdapter.notifyDataSetChanged();
+//        function call to get state dropdown list
+        getStates();
+
+//        date icon button onclick method
+        binding.dateLayout.setEndIconOnClickListener(new View.OnClickListener() {
+            int y=c.get(Calendar.YEAR);
+            int m = c.get(Calendar.MONTH);
+            int d = c.get(Calendar.DAY_OF_MONTH);
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog g=new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        if((i1+1)<10)
+                        {
+                            date = i2+"-0"+(i1+1)+"-"+i;
+                        }
+                        else if(i2<10)
+                        {
+                            date = "0"+i2+"-"+(i1+1)+"-"+i;
+                        }
+                        else if((i1+1)<10 && i2<10)
+                        {
+                            date = "0"+i2+"-0"+(i1+1)+"-"+i;
+                        }
+                        else {
+                            date = i2 + "-" + (i1 + 1) + "-" + i;
+                        }
+                        binding.vaccinationDate.setText(date);
+                    }
+                },y,m,d);
+                g.show();
+            }
+        });
 
 
+//        date button onlcick method
+//        binding.vaccinationDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//
+//            }
+//        });
+
+
+//         locate function on click action
         binding.locateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-        String userPincode = binding.vaccinationPinCode.getText().toString();
-//        String date = binding.vaccinationDate.getText().toString();
-        String date ="31-03-2021";
-//        fetchResults(userPincode,date);
-
-
-        getStatus(userPincode,date);
-        mAdapter.notifyDataSetChanged();
+                    getStatus(apiDistrictId,date);
             }
         });
         return root;
     }
 
 
-//    fetch results functions to fetch data from the api and show it in the vaccination page
+//    getstatus function to fetch data from the api and locate the vaccination centers
 
-    private void getStatus(String userPincode, String date){
+    private void getStatus(String districtId, String date){
         centersArrayList.clear();
-        String url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode="+userPincode+"&date="+date;
+        String url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id="+districtId+"&date="+date;
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url,null, new com.android.volley.Response.Listener<JSONObject>(){
@@ -141,14 +202,10 @@ public class vaccinationFragment extends Fragment {
                                         obj.getString("from"), obj.getString("to"),
                                         obj.getString("pincode"),obj.getString("center_id"),
                                         obj.getString("available_capacity")));
-//                                Log.d("centerName", "onResponse: "+centersArrayList.get(0).getCenterName());
-//                                Log.d("centerName", "onResponse: "+centersArrayList.get(0).getVaccineName());
-//                                Log.d("centerName", "onResponse: "+centersArrayList.get(0).getAge());
                             }
                             mAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Log.d("centerName", "onResponse: error");
                         }
 
                     }
@@ -156,12 +213,112 @@ public class vaccinationFragment extends Fragment {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("volleyError", "onErrorResponse: Volley error");
+                        Toast.makeText(getContext(), "Network Error", Toast.LENGTH_LONG).show();
                     }
                 });
         queue.add(jsonObjectRequest);
     }
 
+//    get states function is used to get the name of the states using api and show in the drop down list
 
+    private void getStates(){
+        String url = "https://cdn-api.co-vin.in/api/v2/admin/location/states";
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url,null, new com.android.volley.Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            getStateName = new ArrayList<String>();
+                            stateList = new ArrayList<cityStateModel>();
+                            JSONArray r = response.getJSONArray("states");
+                            for (int i = 0; i < r.length(); i++) {
+                                JSONObject obj = r.getJSONObject(i);
+                                stateList.add(new cityStateModel(obj.getString("state_id"),obj.getString("state_name")));
+                            }
+                            for (int i = 0; i < stateList.size(); i++) {
+                                getStateName.add(stateList.get(i).getName());
+                            }
+                            ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line,getStateName);
+                            spinAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                            binding.stateSelector.setAdapter(spinAdapter);
+                            binding.stateSelector.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    String stateName = binding.stateSelector.getText().toString();
+                                    String Id = findId(stateName, stateList);
+                                    Log.d("getStates", "onItemClick: "+Id);
+                                    getCity(Id);
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("getStates", "onErrorResponse: error");
+                    }
+                });
+        queue.add(jsonObjectRequest);
+    }
+
+//    get city funct6ion is used to get the name of the cities using api on click via states function/spinner and show in drop drown list
+    private void getCity(String stateId){
+        String url = "https://cdn-api.co-vin.in/api/v2/admin/location/districts/"+stateId;
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url,null, new com.android.volley.Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            ArrayList<String> getCityName = new ArrayList<String>();
+                            ArrayList<cityStateModel> cityList = new ArrayList<cityStateModel>();
+                            JSONArray r = response.getJSONArray("districts");
+                            for (int i = 0; i < r.length(); i++) {
+                                JSONObject obj = r.getJSONObject(i);
+                                cityList.add(new cityStateModel(obj.getString("district_id"),obj.getString("district_name")));
+                            }
+                            for (int i = 0; i < cityList.size(); i++) {
+                                getCityName.add(cityList.get(i).getName());
+                            }
+                            ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line,getCityName);
+                            spinAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+                            binding.citySelector.setAdapter(spinAdapter);
+                            binding.citySelector.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    String cityName = binding.citySelector.getText().toString();
+                                    apiDistrictId = findId(cityName, cityList);
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("getStates", "onErrorResponse: error");
+                    }
+                });
+        queue.add(jsonObjectRequest);
+    }
+
+//    function to find the id of the state and city via the auytofill text
+
+    public String findId(String name, ArrayList<cityStateModel> a)
+    {
+        for (int i = 0; i < a.size(); i++) {
+            if(name.equals(a.get(i).getName()))
+            {
+                return a.get(i).getId();
+            }
+        }
+        return ("-1");
+    }
 
 }
