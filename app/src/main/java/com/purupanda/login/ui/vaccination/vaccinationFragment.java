@@ -158,22 +158,11 @@ public class vaccinationFragment extends Fragment {
         });
 
 
-//        date button onlcick method
-//        binding.vaccinationDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//
-//
-//
-//            }
-//        });
-
-
 //         locate function on click action
         binding.locateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                    date=binding.vaccinationDate.getText().toString();
                     getStatus(apiDistrictId,date);
             }
         });
