@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
         newsRV.setLayoutManager(new LinearLayoutManager(getContext()));
         newsRV.setAdapter(newsRVAdapter);
         getNews();
-        newsRVAdapter.notifyDataSetChanged();
+//        newsRVAdapter.notifyDataSetChanged();
         return root;
     }
 
