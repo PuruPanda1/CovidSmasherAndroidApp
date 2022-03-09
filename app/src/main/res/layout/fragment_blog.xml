@@ -3,95 +3,114 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="10dp"
     android:layout_height="match_parent"
     tools:context=".ui.blog.blogFragment" >
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edit_text"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:fontFamily="@font/poppins"
-        android:gravity="center_vertical"
-        android:hint="Search Topics"
-        android:inputType="textPersonName"
-        android:padding="5dp"
-        android:paddingStart="20dp"
-        android:textColor="#263238"
-        android:textColorHint="#757575"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/newTextView"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/slider_text_background"
-            android:drawableStart="@drawable/ic_new"
+            android:background="@drawable/rounded_edit_text"
+            android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
-            android:textColor="#263238"
+            android:ems="10"
             android:fontFamily="@font/poppins"
             android:gravity="center_vertical"
+            android:hint="Search Topics"
+            android:inputType="textPersonName"
             android:padding="5dp"
-            android:text="New"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/hotTexView"
-            android:layout_width="0dp"
+            android:paddingStart="20dp"
             android:textColor="#263238"
+            android:textColorHint="#757575"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/slider_text_background"
-            android:drawableStart="@drawable/ic_fire"
-            android:drawablePadding="10dp"
-            android:fontFamily="@font/poppins"
-            android:gravity="center_vertical"
-            android:padding="5dp"
-            android:text="Hot"
-            android:textSize="15sp" />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-        <TextView
-            android:id="@+id/bestTextView"
-            android:layout_width="0dp"
-            android:textColor="#263238"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/slider_text_background"
-            android:drawableStart="@drawable/ic_star"
-            android:drawablePadding="10dp"
-            android:fontFamily="@font/poppins"
-            android:gravity="center_vertical"
-            android:padding="5dp"
-            android:text="Best"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/newTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/slider_text_background"
+                android:drawableStart="@drawable/ic_new"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="New"
+                android:textColor="#263238"
+                android:textSize="15sp" />
 
+            <TextView
+                android:id="@+id/hotTexView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/slider_text_background"
+                android:drawableStart="@drawable/ic_fire"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Hot"
+                android:textColor="#263238"
+                android:textSize="15sp" />
 
+            <TextView
+                android:id="@+id/bestTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/slider_text_background"
+                android:drawableStart="@drawable/ic_star"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="Best"
+                android:textColor="#263238"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/blogRecylerView"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="55dp"
+            android:layout_height="match_parent"/>
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="68dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="#0D8E53"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

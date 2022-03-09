@@ -22,12 +22,14 @@
         <entry key="app/src/main/res/drawable/profile.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/rounded_edit_text.xml" value="0.2985" />
         <entry key="app/src/main/res/drawable/slider_text_background.xml" value="0.2985" />
+        <entry key="app/src/main/res/layout/activity_blog_add_page.xml" value="0.27533133817870886" />
         <entry key="app/src/main/res/layout/activity_detailed_news_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main_page.xml" value="0.261965811965812" />
         <entry key="app/src/main/res/layout/activity_news.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_in_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_state_selection.xml" value="0.2744762719110731" />
+        <entry key="app/src/main/res/layout/blog_recycler_view.xml" value="0.27533133817870886" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.261965811965812" />
         <entry key="app/src/main/res/layout/fragment_blog.xml" value="0.24822695035460993" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.22" />

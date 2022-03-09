@@ -1,14 +1,32 @@
 package com.purupanda.login.ui.blog;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.purupanda.login.R;
+import com.purupanda.login.blogAddPage;
+import com.purupanda.login.blogCustomAdapter;
+import com.purupanda.login.databinding.FragmentBlogBinding;
+import com.purupanda.login.models.blogModel;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +34,18 @@ import com.purupanda.login.R;
  * create an instance of this fragment.
  */
 public class blogFragment extends Fragment {
+    private FragmentBlogBinding binding;
+    private ProgressDialog pd;
+
+    //    variables for blog recyclerview
+    private RecyclerView blogRv;
+    private ArrayList<blogModel> blogsArrayList;
+    private blogCustomAdapter mAdapter;
+
+//    firebase firestore database
+    FirebaseFirestore db;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,7 +74,7 @@ public class blogFragment extends Fragment {
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.setArguments(args)    ;
         return fragment;
     }
 
@@ -61,7 +91,74 @@ public class blogFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        pd = new ProgressDialog(getContext());
+        pd.setTitle("Loading");
+        pd.setMessage("loading the forum");
+        pd.show();
+        binding = FragmentBlogBinding.inflate(inflater,container,false);
 
-        return inflater.inflate(R.layout.fragment_blog, container, false);
+//        code for blog recyclerview
+
+        blogRv = binding.blogRecylerView;
+        blogsArrayList = new ArrayList<>();
+        mAdapter = new blogCustomAdapter(blogsArrayList,this);
+        blogRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        blogRv.setAdapter(mAdapter);
+        getBlogs();
+
+//        mAdapter.notifyDataSetChanged();
+//       mAdapter.notifyDataSetChanged(); use this to show and update blog
+
+
+        binding.addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),blogAddPage.class));
+            }
+        });
+
+
+        return binding.getRoot();
+
+
+    }
+
+    private void getBlogs() {
+        blogsArrayList.clear();
+        blogModel a = new blogModel(
+                "title","description","#hash","userID","name","10","5"
+        );
+//        fetching data from the firestore database
+        db = FirebaseFirestore.getInstance();
+        db.collection("blogs")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful())
+                        {
+                            pd.dismiss();
+                            for(QueryDocumentSnapshot document : task.getResult())
+                            {
+                                Log.d("getBlogs", "onComplete: "+document.getData());
+
+                                blogsArrayList.add(new blogModel(
+                                        document.get("title").toString(),document.get("description").toString(),
+                                        document.get("hashTags").toString(),document.get("userId").toString(),
+                                        document.get("userName").toString(),document.get("likeCount").toString(),
+                                        document.get("commentCount").toString()
+                                ));
+                                Log.d("getBlogs", "onComplete: "+document.get("description"));
+                            }
+                            mAdapter.notifyDataSetChanged();
+                        }
+                        else
+                        {
+                            Log.d("getBlogs", "onComplete: "+task.getException());
+                        }
+                    }
+                });
+//        blogsArrayList.add(a);
+
     }
 }

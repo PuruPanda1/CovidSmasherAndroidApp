@@ -12,27 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
         <activity
+            android:name=".blogAddPage"
+            android:exported="false" />
+        <activity
             android:name=".stateSelectionActivity"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".detailedNewsPage"
             android:exported="false" />
         <activity
             android:name=".mainPage"
-            android:exported="false">
-
-        </activity>
-        <activity
-            android:name=".news"
-            android:exported="true"
-            android:label="@string/title_activity_news">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".news"
+            android:exported="false"
+            android:label="@string/title_activity_news">
 
         </activity>
         <activity
