@@ -53,13 +53,6 @@ public class blogCustomAdapter extends RecyclerView.Adapter<blogCustomAdapter.Vi
             @Override
             public void onClick(View view) {
                 Intent in = new Intent(context.getContext(),detailedBlogPage.class);
-                in.putExtra("title",blogs.getTitle());
-                in.putExtra("description",blogs.getDescription());
-                in.putExtra("likeCount",blogs.getLikeCount());
-                in.putExtra("commentCount",blogs.getCommentCount());
-                in.putExtra("hashTags",blogs.getHashTags());
-                in.putExtra("username",blogs.getUsername());
-                in.putExtra("userId",blogs.getUserId());
                 in.putExtra("blogId",blogs.getBlogId());
                 context.startActivity(in);
             }

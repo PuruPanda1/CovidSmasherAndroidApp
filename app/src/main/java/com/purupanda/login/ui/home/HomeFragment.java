@@ -78,6 +78,7 @@ public class HomeFragment extends Fragment {
                                 );
 //                                Log.d("description", "onResponse: "+articlesArrayList.get(0).getDesctiption());
                             }
+                            binding.newProgressBar.setVisibility(View.GONE);
                             newsRVAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();

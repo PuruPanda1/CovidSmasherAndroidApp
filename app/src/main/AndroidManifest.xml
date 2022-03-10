@@ -35,7 +35,9 @@
         <activity
             android:name=".news"
             android:exported="false"
-            android:label="@string/title_activity_news"></activity>
+            android:label="@string/title_activity_news">
+
+        </activity>
         <activity
             android:name=".signInPage"
             android:exported="false" />

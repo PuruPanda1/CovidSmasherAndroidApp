@@ -23,7 +23,7 @@
         <entry key="app/src/main/res/drawable/rounded_edit_text.xml" value="0.2985" />
         <entry key="app/src/main/res/drawable/slider_text_background.xml" value="0.2985" />
         <entry key="app/src/main/res/layout/activity_blog_add_page.xml" value="0.27533133817870886" />
-        <entry key="app/src/main/res/layout/activity_detailed_blog_page.xml" value="0.27533133817870886" />
+        <entry key="app/src/main/res/layout/activity_detailed_blog_page.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_detailed_news_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main_page.xml" value="0.261965811965812" />

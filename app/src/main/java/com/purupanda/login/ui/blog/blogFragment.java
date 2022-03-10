@@ -91,10 +91,11 @@ public class blogFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        pd = new ProgressDialog(getContext());
-        pd.setTitle("Loading");
-        pd.setMessage("loading the forum");
-        pd.show();
+//        binding.newProgressBar.setVisibility(View.VISIBLE);
+//        pd = new ProgressDialog(getContext());
+//        pd.setTitle("Loading");
+//        pd.setMessage("loading the forum");
+//        pd.show();
         binding = FragmentBlogBinding.inflate(inflater,container,false);
 
 //        code for blog recyclerview
@@ -157,7 +158,8 @@ public class blogFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful())
                         {
-                            pd.dismiss();
+//                            pd.dismiss();
+                            binding.newProgressBar.setVisibility(View.GONE);
                             for(QueryDocumentSnapshot document : task.getResult())
                             {
                                 Log.d("getBlogs", "onComplete: "+document.getData());
