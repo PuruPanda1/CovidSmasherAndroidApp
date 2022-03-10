@@ -1,10 +1,10 @@
 package com.purupanda.login.models;
 
 public class blogModel {
-    private String title,description,hashTags,userId,username,likeCount,commentCount;
+    private String title,description,hashTags,userId,username,likeCount,commentCount,blogId;
 
 
-    public blogModel(String title, String description, String hashTags, String userId, String username, String likeCount, String commentCount) {
+    public blogModel(String title, String description, String hashTags, String userId, String username, String likeCount, String commentCount, String blogId) {
         this.title = title;
         this.description = description;
         this.hashTags = hashTags;
@@ -12,6 +12,15 @@ public class blogModel {
         this.username = username;
         this.likeCount = likeCount;
         this.commentCount = commentCount;
+        this.blogId = blogId;
+    }
+
+    public String getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(String blogId) {
+        this.blogId = blogId;
     }
 
     public String getLikeCount() {

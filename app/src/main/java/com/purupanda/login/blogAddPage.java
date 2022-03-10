@@ -14,8 +14,10 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +33,7 @@ import com.purupanda.login.ui.blog.blogFragment;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class blogAddPage extends AppCompatActivity {
     private ActivityBlogAddPageBinding binding;
@@ -105,7 +108,9 @@ public class blogAddPage extends AppCompatActivity {
                 else
                 {
                     userName = profileUser.getName().toString();
+                    String id = UUID.randomUUID().toString();
                     Map<String, Object> blogPost = new HashMap<>();
+                    blogPost.put("blogId",id);
                     blogPost.put("title",title);
                     blogPost.put("description",description);
                     blogPost.put("hashTags",hashTags);
@@ -114,10 +119,11 @@ public class blogAddPage extends AppCompatActivity {
                     blogPost.put("likeCount",0);
                     blogPost.put("commentCount",0);
                     db.collection("blogs")
-                            .add(blogPost)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            .document(id)
+                            .set(blogPost)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onSuccess(DocumentReference documentReference) {
+                                public void onComplete(@NonNull Task<Void> task) {
                                     Toast.makeText(blogAddPage.this, "Post Created", Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
                                     finish();

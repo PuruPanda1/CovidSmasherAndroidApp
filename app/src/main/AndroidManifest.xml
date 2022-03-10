@@ -12,11 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
         <activity
+            android:name=".detailedBlogPage"
+            android:exported="false" />
+        <activity
             android:name=".blogAddPage"
             android:exported="false" />
         <activity
             android:name=".stateSelectionActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".detailedNewsPage"
             android:exported="false" />
@@ -32,9 +35,7 @@
         <activity
             android:name=".news"
             android:exported="false"
-            android:label="@string/title_activity_news">
-
-        </activity>
+            android:label="@string/title_activity_news"></activity>
         <activity
             android:name=".signInPage"
             android:exported="false" />

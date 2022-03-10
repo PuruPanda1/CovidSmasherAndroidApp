@@ -5,6 +5,7 @@ import static java.lang.Math.round;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -123,6 +124,31 @@ public class vaccinationFragment extends Fragment {
         vaccineRV.setAdapter(mAdapter);
 //        function call to get state dropdown list
         getStates();
+
+//        vaccine Recycler View on scroll listener
+        final int[] state = new int[1];
+        vaccineRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                state[0] = newState;
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy<(0))
+                {
+//                    scrolling up
+                    binding.slidingLayout.setVisibility(View.VISIBLE);
+                }
+                else if(dy>0 && (state[0]==0 || state[0]==2))
+                {
+//                    scrolling down
+                    binding.slidingLayout.setVisibility(View.GONE);
+                }
+            }
+        });
 
 //        date icon button onclick method
         binding.dateLayout.setEndIconOnClickListener(new View.OnClickListener() {

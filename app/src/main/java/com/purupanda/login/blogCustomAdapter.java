@@ -1,9 +1,12 @@
 package com.purupanda.login;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,10 +36,34 @@ public class blogCustomAdapter extends RecyclerView.Adapter<blogCustomAdapter.Vi
     public void onBindViewHolder(@NonNull blogCustomAdapter.ViewHolder holder, int position) {
         blogModel blogs = blogArrayList.get(position);
         holder.title.setText(blogs.getTitle());
-        holder.description.setText(blogs.getDescription());
+        if(blogs.getDescription().length()>50)
+        {
+            String desc = blogs.getDescription().substring(0,50)+"...";
+            holder.description.setText(desc);
+        }
+        else
+        {
+            holder.description.setText(blogs.getDescription());
+        }
+        holder.hashTags.setText(blogs.getHashTags());
         holder.username.setText(blogs.getUsername());
         holder.likeCount.setText(blogs.getLikeCount());
         holder.commentCount.setText(blogs.getCommentCount());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(context.getContext(),detailedBlogPage.class);
+                in.putExtra("title",blogs.getTitle());
+                in.putExtra("description",blogs.getDescription());
+                in.putExtra("likeCount",blogs.getLikeCount());
+                in.putExtra("commentCount",blogs.getCommentCount());
+                in.putExtra("hashTags",blogs.getHashTags());
+                in.putExtra("username",blogs.getUsername());
+                in.putExtra("userId",blogs.getUserId());
+                in.putExtra("blogId",blogs.getBlogId());
+                context.startActivity(in);
+            }
+        });
     }
 
     @Override
@@ -50,13 +77,15 @@ public class blogCustomAdapter extends RecyclerView.Adapter<blogCustomAdapter.Vi
         private final TextView likeCount;
         private final TextView username;
         private final TextView commentCount;
-                public ViewHolder(@NonNull View itemView) {
+        private final TextView hashTags;
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.blogTitleRV);
             description = itemView.findViewById(R.id.blogDescriptionRV);
             likeCount = itemView.findViewById(R.id.blogLikeCountRV);
             username = itemView.findViewById(R.id.blogUserNameRV);
             commentCount = itemView.findViewById(R.id.blogCommentCountRV);
+            hashTags = itemView.findViewById(R.id.blogHashTags);
         }
     }
 }

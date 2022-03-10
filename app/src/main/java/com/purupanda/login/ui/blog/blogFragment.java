@@ -106,6 +106,28 @@ public class blogFragment extends Fragment {
         blogRv.setAdapter(mAdapter);
         getBlogs();
 
+        final int[] state = new int[1];
+        blogRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                state[0] = newState;
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy>0 && (state[0]==0 || state[0]==2))
+                {
+                    binding.slidingBlogLayout.setVisibility(View.GONE);
+                }
+                else if(dy< (0))
+                {
+                    binding.slidingBlogLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 //        mAdapter.notifyDataSetChanged();
 //       mAdapter.notifyDataSetChanged(); use this to show and update blog
 
@@ -125,9 +147,7 @@ public class blogFragment extends Fragment {
 
     private void getBlogs() {
         blogsArrayList.clear();
-        blogModel a = new blogModel(
-                "title","description","#hash","userID","name","10","5"
-        );
+
 //        fetching data from the firestore database
         db = FirebaseFirestore.getInstance();
         db.collection("blogs")
@@ -146,7 +166,8 @@ public class blogFragment extends Fragment {
                                         document.get("title").toString(),document.get("description").toString(),
                                         document.get("hashTags").toString(),document.get("userId").toString(),
                                         document.get("userName").toString(),document.get("likeCount").toString(),
-                                        document.get("commentCount").toString()
+                                        document.get("commentCount").toString(),
+                                        document.get("blogId").toString()
                                 ));
                                 Log.d("getBlogs", "onComplete: "+document.get("description"));
                             }
