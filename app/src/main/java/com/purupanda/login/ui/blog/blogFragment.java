@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,11 +15,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.purupanda.login.R;
@@ -35,7 +40,6 @@ import java.util.ArrayList;
  */
 public class blogFragment extends Fragment {
     private FragmentBlogBinding binding;
-    private ProgressDialog pd;
 
     //    variables for blog recyclerview
     private RecyclerView blogRv;
@@ -146,21 +150,60 @@ public class blogFragment extends Fragment {
 
     }
 
+//    private void getBlogs() {
+//        blogsArrayList.clear();
+//
+////        fetching data from the firestore database
+//        db = FirebaseFirestore.getInstance();
+//        db.collection("blogs")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful())
+//                        {
+////                            pd.dismiss();
+//                            binding.newProgressBar.setVisibility(View.GONE);
+//                            for(QueryDocumentSnapshot document : task.getResult())
+//                            {
+//                                Log.d("getBlogs", "onComplete: "+document.getData());
+//
+//                                blogsArrayList.add(new blogModel(
+//                                        document.get("title").toString(),document.get("description").toString(),
+//                                        document.get("hashTags").toString(),document.get("userId").toString(),
+//                                        document.get("userName").toString(),document.get("likeCount").toString(),
+//                                        document.get("commentCount").toString(),
+//                                        document.get("blogId").toString()
+//                                ));
+//                                Log.d("getBlogs", "onComplete: "+document.get("description"));
+//                            }
+//                            mAdapter.notifyDataSetChanged();
+//                        }
+//                        else
+//                        {
+//                            Log.d("getBlogs", "onComplete: "+task.getException());
+//                        }
+//                    }
+//                });
+//    }
+
     private void getBlogs() {
         blogsArrayList.clear();
 
 //        fetching data from the firestore database
         db = FirebaseFirestore.getInstance();
         db.collection("blogs")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful())
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(error != null)
                         {
-//                            pd.dismiss();
+                            Toast.makeText(getContext(), "Error"+error.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
                             binding.newProgressBar.setVisibility(View.GONE);
-                            for(QueryDocumentSnapshot document : task.getResult())
+                            for(DocumentSnapshot document : value)
                             {
                                 Log.d("getBlogs", "onComplete: "+document.getData());
 
@@ -175,13 +218,9 @@ public class blogFragment extends Fragment {
                             }
                             mAdapter.notifyDataSetChanged();
                         }
-                        else
-                        {
-                            Log.d("getBlogs", "onComplete: "+task.getException());
-                        }
                     }
                 });
-//        blogsArrayList.add(a);
-
     }
+
+
 }

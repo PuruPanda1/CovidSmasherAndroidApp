@@ -5,22 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:background="@color/white"
     tools:context=".ui.blog.blogFragment" >
 
-    <com.github.ybq.android.spinkit.SpinKitView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/newProgressBar"
-        style="@style/SpinKitView.Large.Wave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        app:SpinKit_Color="@color/purple_200"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/greenplane" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -38,6 +39,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_edit_text"
                 android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="10dp"
@@ -52,75 +54,13 @@
                 android:textColorHint="#757575"
                 android:textSize="18sp" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="15dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
-
-                <TextView
-                    android:id="@+id/newTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/slider_text_background"
-                    android:drawableStart="@drawable/ic_new"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/poppins"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:text="New"
-                    android:textColor="#263238"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/hotTexView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/slider_text_background"
-                    android:drawableStart="@drawable/ic_fire"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/poppins"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:text="Hot"
-                    android:textColor="#263238"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/bestTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/slider_text_background"
-                    android:drawableStart="@drawable/ic_star"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/poppins"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:text="Best"
-                    android:textColor="#263238"
-                    android:textSize="15sp" />
-            </LinearLayout>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/blogRecylerView"
             android:layout_width="match_parent"
-            android:layout_marginBottom="55dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

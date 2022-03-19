@@ -38,7 +38,6 @@ import java.util.UUID;
 public class blogAddPage extends AppCompatActivity {
     private ActivityBlogAddPageBinding binding;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ProgressDialog progressDialog;
     private String userId,userName="default";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class blogAddPage extends AppCompatActivity {
 
 
 //        db = FirebaseFirestore.getInstance();
-        progressDialog = new ProgressDialog(this);
 
 //        getting the current logged in user
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -61,12 +59,11 @@ public class blogAddPage extends AppCompatActivity {
         binding.blogSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.setTitle("Creating new blog");
-                progressDialog.setMessage("Your blog is being created");
-                progressDialog.show();
+                binding.newProgressBar.setVisibility(View.VISIBLE);
+                binding.mainLayout.setVisibility(View.GONE);
                 if(binding.blogTitle.getText().toString().equals("") || binding.blogDescription.getText().toString().equals(""))
                 {
-                    progressDialog.dismiss();
+                    binding.newProgressBar.setVisibility(View.GONE);
                     if(binding.blogTitle.getText().toString().equals(""))
                         binding.blogTitle.requestFocus();
                     else
@@ -125,7 +122,7 @@ public class blogAddPage extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Toast.makeText(blogAddPage.this, "Post Created", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
+//                                    progressDialog.dismiss();
                                     finish();
                                 }
                             })
