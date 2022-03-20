@@ -94,12 +94,6 @@ public class blogFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-//        binding.newProgressBar.setVisibility(View.VISIBLE);
-//        pd = new ProgressDialog(getContext());
-//        pd.setTitle("Loading");
-//        pd.setMessage("loading the forum");
-//        pd.show();
         binding = FragmentBlogBinding.inflate(inflater,container,false);
 
 //        code for blog recyclerview
@@ -150,46 +144,8 @@ public class blogFragment extends Fragment {
 
     }
 
-//    private void getBlogs() {
-//        blogsArrayList.clear();
-//
-////        fetching data from the firestore database
-//        db = FirebaseFirestore.getInstance();
-//        db.collection("blogs")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if(task.isSuccessful())
-//                        {
-////                            pd.dismiss();
-//                            binding.newProgressBar.setVisibility(View.GONE);
-//                            for(QueryDocumentSnapshot document : task.getResult())
-//                            {
-//                                Log.d("getBlogs", "onComplete: "+document.getData());
-//
-//                                blogsArrayList.add(new blogModel(
-//                                        document.get("title").toString(),document.get("description").toString(),
-//                                        document.get("hashTags").toString(),document.get("userId").toString(),
-//                                        document.get("userName").toString(),document.get("likeCount").toString(),
-//                                        document.get("commentCount").toString(),
-//                                        document.get("blogId").toString()
-//                                ));
-//                                Log.d("getBlogs", "onComplete: "+document.get("description"));
-//                            }
-//                            mAdapter.notifyDataSetChanged();
-//                        }
-//                        else
-//                        {
-//                            Log.d("getBlogs", "onComplete: "+task.getException());
-//                        }
-//                    }
-//                });
-//    }
-
     private void getBlogs() {
         blogsArrayList.clear();
-
 //        fetching data from the firestore database
         db = FirebaseFirestore.getInstance();
         db.collection("blogs")
@@ -205,8 +161,6 @@ public class blogFragment extends Fragment {
                             binding.newProgressBar.setVisibility(View.GONE);
                             for(DocumentSnapshot document : value)
                             {
-                                Log.d("getBlogs", "onComplete: "+document.getData());
-
                                 blogsArrayList.add(new blogModel(
                                         document.get("title").toString(),document.get("description").toString(),
                                         document.get("hashTags").toString(),document.get("userId").toString(),
