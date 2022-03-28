@@ -47,6 +47,7 @@ public class blogCustomAdapter extends RecyclerView.Adapter<blogCustomAdapter.Vi
         }
         holder.hashTags.setText(blogs.getHashTags());
         holder.username.setText(blogs.getUsername());
+        holder.dateTime.setText(blogs.getDateTime());
         holder.likeCount.setText(blogs.getLikeCount());
         holder.commentCount.setText(blogs.getCommentCount());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +72,7 @@ public class blogCustomAdapter extends RecyclerView.Adapter<blogCustomAdapter.Vi
         private final TextView username;
         private final TextView commentCount;
         private final TextView hashTags;
+        private final TextView dateTime;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.blogTitleRV);
@@ -79,6 +81,7 @@ public class blogCustomAdapter extends RecyclerView.Adapter<blogCustomAdapter.Vi
             username = itemView.findViewById(R.id.blogUserNameRV);
             commentCount = itemView.findViewById(R.id.blogCommentCountRV);
             hashTags = itemView.findViewById(R.id.blogHashTags);
+            dateTime = itemView.findViewById(R.id.dateTimeBlogRV);
         }
     }
 }

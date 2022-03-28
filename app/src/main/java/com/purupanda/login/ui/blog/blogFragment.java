@@ -29,6 +29,7 @@ import com.purupanda.login.R;
 import com.purupanda.login.blogAddPage;
 import com.purupanda.login.blogCustomAdapter;
 import com.purupanda.login.databinding.FragmentBlogBinding;
+import com.purupanda.login.detailedBlogPage;
 import com.purupanda.login.models.blogModel;
 
 import java.util.ArrayList;
@@ -161,13 +162,16 @@ public class blogFragment extends Fragment {
                             binding.newProgressBar.setVisibility(View.GONE);
                             for(DocumentSnapshot document : value)
                             {
-                                blogsArrayList.add(new blogModel(
-                                        document.get("title").toString(),document.get("description").toString(),
-                                        document.get("hashTags").toString(),document.get("userId").toString(),
-                                        document.get("userName").toString(),document.get("likeCount").toString(),
-                                        document.get("commentCount").toString(),
-                                        document.get("blogId").toString()
-                                ));
+                                    long milis = (long) document.get("dateTime");
+                                    String time = new detailedBlogPage().getTimeAgo(milis);
+                                    blogsArrayList.add(new blogModel(
+                                            document.get("title").toString(), document.get("description").toString(),
+                                            document.get("hashTags").toString(), document.get("userId").toString(),
+                                            document.get("userName").toString(), document.get("likeCount").toString(),
+                                            document.get("commentCount").toString(),
+                                            document.get("blogId").toString(), time
+                                    ));
+
                                 Log.d("getBlogs", "onComplete: "+document.get("description"));
                             }
                             mAdapter.notifyDataSetChanged();

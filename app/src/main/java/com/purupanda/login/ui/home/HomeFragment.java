@@ -31,6 +31,8 @@ import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
+
+    private task1 t;
 //    creating asyntask class
     public class task1 extends AsyncTask<Void, Void, Integer>{
 
@@ -44,7 +46,6 @@ public class HomeFragment extends Fragment {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        newsModel newsModel;
                         try {
                             JSONArray r = response.getJSONArray("articles");
                             for (int i = 0; i < r.length(); i++) {
@@ -55,12 +56,13 @@ public class HomeFragment extends Fragment {
                                                 obj.getString("image"),obj.getString("url"),obj.getString("description"))
                                 );
                             }
-//                            binding.newProgressBar.setVisibility(View.GONE);
+                            if(!isCancelled()) {
+                                publishProgress();
+                            }
                             newsRVAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }, new com.android.volley.Response.ErrorListener() {
 
@@ -76,8 +78,19 @@ public class HomeFragment extends Fragment {
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
-        binding.newProgressBar.setVisibility(View.GONE);
+//        binding.newProgressBar.setVisibility(View.GONE);
         Log.d("postExecution", "onPostExecute: Execution Completed");
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        super.onProgressUpdate(values);
+        binding.newProgressBar.setVisibility(View.GONE);
     }
 }
 
@@ -100,54 +113,16 @@ public class HomeFragment extends Fragment {
         newsRVAdapter = new newsCustomAdapter(articlesArrayList,this);
         newsRV.setLayoutManager(new LinearLayoutManager(getContext()));
         newsRV.setAdapter(newsRVAdapter);
-        task1 t = new task1();
+        t = new task1();
         t.execute();
-//        getNews();
-//        newsRVAdapter.notifyDataSetChanged();
         return root;
     }
-
-//    private void getNews(){
-//        articlesArrayList.clear();
-//        String url = "https://gnews.io/api/v4/search?q=medical&token=91b145c4cfebf58974bd497a23bdabd1&lang=en&country=in";
-//        RequestQueue queue = Volley.newRequestQueue(getContext());
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-//                (Request.Method.GET, url,null, new com.android.volley.Response.Listener<JSONObject>(){
-//
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        newsModel newsModel;
-//                        try {
-//                            JSONArray r = response.getJSONArray("articles");
-//                            for (int i = 0; i < r.length(); i++) {
-//                                JSONObject obj = r.getJSONObject(i);
-//                                JSONObject source = obj.getJSONObject("source");
-//                                articlesArrayList.add(new newsModel
-//                                        (obj.getString("title"),source.getString("name"),
-//                                                obj.getString("image"),obj.getString("url"),obj.getString("description"))
-//                                );
-//                            }
-////                            binding.newProgressBar.setVisibility(View.GONE);
-//                            newsRVAdapter.notifyDataSetChanged();
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                }, new com.android.volley.Response.ErrorListener() {
-//
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//
-//                    }
-//                });
-//        queue.add(jsonObjectRequest);
-//    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        t.cancel(true);
     }
 
 

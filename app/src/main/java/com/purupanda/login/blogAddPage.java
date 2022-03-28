@@ -104,6 +104,7 @@ public class blogAddPage extends AppCompatActivity {
                 }
                 else
                 {
+                    long datetime = System.currentTimeMillis();
                     userName = profileUser.getName().toString();
                     String id = UUID.randomUUID().toString();
                     Map<String, Object> blogPost = new HashMap<>();
@@ -114,6 +115,7 @@ public class blogAddPage extends AppCompatActivity {
                     blogPost.put("userId",userId);
                     blogPost.put("userName",userName);
                     blogPost.put("likeCount",0);
+                    blogPost.put("dateTime",datetime);
                     blogPost.put("commentCount",0);
                     db.collection("blogs")
                             .document(id)
